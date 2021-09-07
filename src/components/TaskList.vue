@@ -3,12 +3,12 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between mb-4">
-          <h4 class="card-title">To Do</h4>
+          <h4 class="card-title">{{ title }}</h4>
           <button
             type="btn btn-primary btn-sm"
             class="btn btn-primary"
             @click="
-              add({
+              addTask({
                 issue_id: 1,
                 title: 'Improve accuracy of voice-to-text model',
                 assignee: 'String',
@@ -33,7 +33,7 @@
             Add Task
           </button>
         </div>
-        <draggable v-model="tasks" item-key="issue_id">
+        <draggable v-model="tasks" item-key="issue_id" group="taskList">
           <template #item="{ element }">
             <Task
               :name="element.name"
@@ -51,19 +51,26 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 export default {
-  name: "Todo",
+  name: "TaskList",
+  props: {
+    store: String,
+    title: String,
+  },
   computed: {
     tasks: {
       get() {
-        return this.$store.state.todo.tasks;
+        return this.$store.state[this.store].tasks;
       },
       set(value) {
-        this.$store.commit("todo/updateTasks", value);
+        this.$store.commit(`${this.store}/updateTasks`, value);
       },
     },
   },
-  methods: { ...mapActions({ add: "todo/addTask" }) },
+  methods: {
+    addTask(task) {
+      this.$store.dispatch(`${this.store}/addTask`, task);
+    },
+  },
 };
 </script>

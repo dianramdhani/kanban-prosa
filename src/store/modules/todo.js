@@ -1,22 +1,5 @@
 const state = () => ({
-    tasks: [
-        {
-            issue_id: 1,
-            title: "Improve accuracy of voice-to-text model",
-            assignee: "String",
-            start_date: new Date("07-09-2021 11:50"),
-            end_date: new Date("07-09-2021 11:50"),
-            tags: "RESEARCH",
-        },
-        {
-            issue_id: 2,
-            title: "Create API to load user info from database",
-            assignee: "String",
-            start_date: new Date("07-09-2021 11:50"),
-            end_date: new Date("07-09-2021 11:50"),
-            tags: "BACKEND",
-        },
-    ]
+    tasks: []
 });
 const getters = {};
 const actions = {

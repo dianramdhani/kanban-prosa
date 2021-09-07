@@ -3,15 +3,15 @@
   <div class="drl-content px-4">
     <Header />
     <div class="row g-3">
-      <Todo />
-      <Todo />
-      <Todo />
+      <TaskList title="Backlog" store="backlog" />
+      <TaskList title="To Do" store="todo" />
+      <TaskList title="Done" store="done" />
     </div>
   </div>
 </template>
 
 <script>
-import Todo from "./components/Todo.vue";
+import TaskList from "./components/TaskList.vue";
 import Header from "./components/Header.vue";
 import Navigation from "./components/Navigation.vue";
 
@@ -19,7 +19,7 @@ export default {
   name: "App",
   components: {
     Header,
-    Todo,
+    TaskList,
     Navigation,
   },
 };
