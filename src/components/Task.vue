@@ -1,18 +1,18 @@
 <template>
-  <div class="card" style="width: 18rem">
+  <div class="card border-0 bg-light mb-2">
     <div class="card-body">
-      <p class="card-text">Improve accuracy of voice to text model</p>
+      <p class="card-text fw-bold">{{ title }}</p>
       <div class="d-flex justify-content-between">
         <div>
           <img
             class="me-1"
             src="../assets/a.png"
             alt="a"
-            style="max-height: 20px"
+            style="max-height: 25px"
           />
-          <span class="badge rounded-pill bg-primary">Primary</span>
+          <span class="badge rounded-pill bg-primary">{{ tags }}</span>
         </div>
-        2 days
+        {{ dueDate }}
       </div>
     </div>
   </div>
