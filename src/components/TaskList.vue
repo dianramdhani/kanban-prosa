@@ -33,7 +33,12 @@
             Add Task
           </button>
         </div>
-        <draggable v-model="tasks" item-key="issue_id" group="taskList">
+        <draggable
+          v-model="tasks"
+          item-key="issue_id"
+          group="taskList"
+          @change="log"
+        >
           <template #item="{ element }">
             <Task
               :name="element.name"
@@ -70,6 +75,10 @@ export default {
   methods: {
     addTask(task) {
       this.$store.dispatch(`${this.store}/addTask`, task);
+    },
+
+    log(event) {
+      this.$store.dispatch(`${this.store}/log`, event);
     },
   },
 };

@@ -22,6 +22,10 @@ const getters = {};
 const actions = {
     addTask({ commit }, task) {
         commit('addTask', task);
+    },
+
+    log({ }, event) {
+        console.log(event, 'backlog');
     }
 };
 const mutations = {
