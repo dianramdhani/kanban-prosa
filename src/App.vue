@@ -28,6 +28,8 @@ export default {
 <style scoped>
 .drl-content {
   width: calc(100vw - 300px);
+  height: 100vh;
+  overflow-y: auto;
   position: absolute;
   right: 0;
 }

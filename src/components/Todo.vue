@@ -4,7 +4,20 @@
       <div class="card-body">
         <div class="d-flex justify-content-between mb-4">
           <h4 class="card-title">To Do</h4>
-          <button type="btn btn-primary btn-sm" class="btn btn-primary">
+          <button
+            type="btn btn-primary btn-sm"
+            class="btn btn-primary"
+            @click="
+              add({
+                issue_id: 1,
+                title: 'Improve accuracy of voice-to-text model',
+                assignee: 'String',
+                start_date: new Date('07-09-2021 11:50'),
+                end_date: new Date('07-09-2021 11:50'),
+                tags: 'RESEARCH',
+              })
+            "
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -20,12 +33,7 @@
             Add Task
           </button>
         </div>
-        <draggable
-          v-model="myArray"
-          @start="drag = true"
-          @end="drag = false"
-          item-key="issue_id"
-        >
+        <draggable v-model="tasks" item-key="issue_id">
           <template #item="{ element }">
             <Task
               :name="element.name"
@@ -43,30 +51,19 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "Todo",
-  data() {
-    return {
-      drag: false,
-      myArray: [
-        {
-          issue_id: 1,
-          title: "Improve accuracy of voice-to-text model",
-          assignee: "String",
-          start_date: new Date("07-09-2021 11:50"),
-          end_date: new Date("07-09-2021 11:50"),
-          tags: "RESEARCH",
-        },
-        {
-          issue_id: 2,
-          title: "Create API to load user info from database",
-          assignee: "String",
-          start_date: new Date("07-09-2021 11:50"),
-          end_date: new Date("07-09-2021 11:50"),
-          tags: "BACKEND",
-        },
-      ],
-    };
+  computed: {
+    tasks: {
+      get() {
+        return this.$store.state.todo.tasks;
+      },
+      set(value) {
+        this.$store.commit("todo/updateTasks", value);
+      },
+    },
   },
+  methods: { ...mapActions({ add: "todo/addTask" }) },
 };
 </script>
