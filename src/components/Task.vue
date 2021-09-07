@@ -9,6 +9,7 @@
             src="../assets/a.png"
             alt="a"
             style="max-height: 25px"
+            :title="assignee"
           />
           <span class="badge rounded-pill bg-primary">{{ tags }}</span>
         </div>
