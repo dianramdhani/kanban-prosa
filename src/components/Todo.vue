@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between mb-4">
-          <h5 class="card-title">To Do</h5>
+          <h4 class="card-title">To Do</h4>
           <button type="btn btn-primary btn-sm" class="btn btn-primary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
