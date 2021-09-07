@@ -4,7 +4,11 @@
       <div class="card-body">
         <div class="d-flex justify-content-between mb-4">
           <h4 class="card-title">{{ title }}</h4>
-          <button type="button" class="btn btn-primary" @click="showModal">
+          <button
+            type="button"
+            class="btn btn-primary"
+            @click="modalTask.toggle"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -64,27 +68,49 @@
         <div class="modal-body">
           <div class="mb-3">
             <label class="form-label">Title</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" v-model="_title" />
           </div>
           <div class="mb-3">
             <label class="form-label">Tags</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" v-model="_tags" />
           </div>
           <div class="mb-3">
             <label class="form-label">Assignee</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" v-model="_assignee" />
           </div>
           <div class="mb-3">
             <label class="form-label">Start Date</label>
-            <input type="datetime-local" class="form-control" />
+            <input
+              type="datetime-local"
+              class="form-control"
+              v-model="_start_date"
+            />
           </div>
           <div class="mb-3">
             <label class="form-label">End Date</label>
-            <input type="datetime-local" class="form-control" />
+            <input
+              type="datetime-local"
+              class="form-control"
+              v-model="_end_date"
+            />
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Understood</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            @click.prevent="
+              addTask({
+                title: _title,
+                tags: _tags,
+                assignee: _assignee,
+                start_date: _start_date,
+                end_date: _end_date,
+              })
+            "
+          >
+            Submit
+          </button>
         </div>
       </form>
     </div>
@@ -100,6 +126,19 @@ export default {
     store: String,
     title: String,
   },
+  data() {
+    return {
+      modalTask: null,
+      _title: "",
+      _tags: "",
+      _assignee: "",
+      _start_date: null,
+      _end_date: null,
+    };
+  },
+  mounted() {
+    this.modalTask = new Modal(this.$refs.modalTask);
+  },
   computed: {
     tasks: {
       get() {
@@ -111,18 +150,13 @@ export default {
     },
   },
   methods: {
-    addTask(task) {
+    addTask(task = { title, tags, assignee, start_date, end_date }) {
       this.$store.dispatch(`${this.store}/addTask`, task);
+      this.modalTask.toggle();
     },
 
     log(event) {
       this.$store.dispatch(`${this.store}/log`, event);
-    },
-
-    showModal() {
-      const modalTask = new Modal(this.$refs.modalTask);
-      modalTask.toggle();
-      console.log(console.log(modalTask));
     },
   },
 };

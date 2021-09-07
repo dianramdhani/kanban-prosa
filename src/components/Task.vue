@@ -24,8 +24,8 @@ export default {
   props: {
     title: String,
     assignee: String,
-    start_date: Date,
-    end_date: Date,
+    start_date: Date | String,
+    end_date: Date | String,
     tags: String,
   },
   computed: {

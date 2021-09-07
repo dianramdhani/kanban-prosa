@@ -16,7 +16,8 @@ const mutations = {
         state.tasks = tasks;
     },
 
-    addTask(state, task) {
+    addTask(state, task = { title, tags, assignee, start_date, end_date }) {
+        task['issue_id'] = Math.floor(Math.random() * 100);
         state.tasks.push(task);
     }
 };
