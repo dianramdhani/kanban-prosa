@@ -4,20 +4,7 @@
       <div class="card-body">
         <div class="d-flex justify-content-between mb-4">
           <h4 class="card-title">{{ title }}</h4>
-          <button
-            type="btn btn-primary btn-sm"
-            class="btn btn-primary"
-            @click="
-              addTask({
-                issue_id: 1,
-                title: 'Improve accuracy of voice-to-text model',
-                assignee: 'String',
-                start_date: new Date('07-09-2021 11:50'),
-                end_date: new Date('07-09-2021 11:50'),
-                tags: 'RESEARCH',
-              })
-            "
-          >
+          <button type="button" class="btn btn-primary" @click="showModal">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -53,9 +40,60 @@
       </div>
     </div>
   </div>
+
+  <div
+    class="modal fade"
+    ref="modalTask"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">New {{ title }}</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Tags</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Assignee</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Start Date</label>
+            <input type="datetime-local" class="form-control" />
+          </div>
+          <div class="mb-3">
+            <label class="form-label">End Date</label>
+            <input type="datetime-local" class="form-control" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>
+import { Modal } from "bootstrap";
+
 export default {
   name: "TaskList",
   props: {
@@ -79,6 +117,12 @@ export default {
 
     log(event) {
       this.$store.dispatch(`${this.store}/log`, event);
+    },
+
+    showModal() {
+      const modalTask = new Modal(this.$refs.modalTask);
+      modalTask.toggle();
+      console.log(console.log(modalTask));
     },
   },
 };
