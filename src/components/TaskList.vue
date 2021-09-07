@@ -99,15 +99,7 @@
           <button
             type="submit"
             class="btn btn-primary"
-            @click.prevent="
-              addTask({
-                title: _title,
-                tags: _tags,
-                assignee: _assignee,
-                start_date: _start_date,
-                end_date: _end_date,
-              })
-            "
+            @click.prevent="addTask"
           >
             Submit
           </button>
@@ -150,8 +142,20 @@ export default {
     },
   },
   methods: {
-    addTask(task = { title, tags, assignee, start_date, end_date }) {
+    addTask() {
+      const task = {
+        title: this._title,
+        tags: this._tags,
+        assignee: this._assignee,
+        start_date: this._start_date,
+        end_date: this._end_date,
+      };
       this.$store.dispatch(`${this.store}/addTask`, task);
+      this._title= "";
+      this._tags= "";
+      this._assignee= "";
+      this._start_date= null;
+      this._end_date= null;
       this.modalTask.toggle();
     },
 

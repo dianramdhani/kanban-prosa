@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   name: "Task",
   props: {
@@ -30,7 +32,10 @@ export default {
   },
   computed: {
     dueDate() {
-      return "2 days";
+      const startDate = new Date(this.start_date),
+        endDate = new Date(this.end_date),
+        duration = Math.abs(endDate - startDate);
+      return moment.duration(duration, "millisecond").humanize();
     },
   },
 };
