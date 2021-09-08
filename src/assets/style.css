@@ -1,3 +1,15 @@
-html, h5 {
-    font-size: 13px;
+html,
+h5 {
+  font-size: 13px;
+}
+
+.btn-primary {
+  background-color: #4ca991;
+  border-color: #4ca991;
+  border-radius: 3rem;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #57c5a9;
+  border-color: #57c5a9;
 }
