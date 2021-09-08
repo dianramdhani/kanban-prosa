@@ -7,7 +7,6 @@ import draggable from "vuedraggable";
 import Task from './components/Task';
 import store from './store';
 
-
 const app = createApp(App);
 app.use(store);
 app.component('draggable', draggable);

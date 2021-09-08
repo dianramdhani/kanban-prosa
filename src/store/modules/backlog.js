@@ -1,40 +1,31 @@
+import { uuid } from 'vue-uuid';
+import TaskService from '../../services/TaskService';
+
+const taskService = new TaskService('backlog');
+
 const state = () => ({
-    tasks: [
-        {
-            issue_id: 1,
-            title: "Improve accuracy of voice-to-text model",
-            assignee: "String",
-            start_date: new Date("07-09-2021 11:50"),
-            end_date: new Date("07-09-2021 11:50"),
-            tags: "RESEARCH",
-        },
-        {
-            issue_id: 2,
-            title: "Create API to load user info from database",
-            assignee: "String",
-            start_date: new Date("07-09-2021 11:50"),
-            end_date: new Date("07-09-2021 11:50"),
-            tags: "BACKEND",
-        },
-    ]
+    tasks: []
 });
 const getters = {};
 const actions = {
-    addTask({ commit }, task) {
+    async addTask({ commit, state }, task) {
+        task['issue_id'] = uuid.v1();
         commit('addTask', task);
+        await taskService.updateTasks(state.tasks);
     },
 
-    log({ }, event) {
-        console.log(event, 'backlog');
-    }
+    async fetchTasks({ commit }) {
+        const tasks = await taskService.getTasks();
+        commit('updateTasks', tasks);
+    },
 };
 const mutations = {
     updateTasks(state, tasks) {
         state.tasks = tasks;
+        taskService.updateTasks(state.tasks);
     },
 
-    addTask(state, task = { title, tags, assignee, start_date, end_date }) {
-        task['issue_id'] = Math.floor(Math.random() * 100);
+    addTask(state, task = { title, tags, assignee, start_date, end_date, issue_id }) {
         state.tasks.push(task);
     }
 };
@@ -44,5 +35,5 @@ export default {
     state,
     getters,
     actions,
-    mutations
+    mutations,
 }

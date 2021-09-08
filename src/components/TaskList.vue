@@ -28,7 +28,6 @@
           v-model="tasks"
           item-key="issue_id"
           group="taskList"
-          @change="log"
         >
           <template #item="{ element }">
             <Task
@@ -130,6 +129,7 @@ export default {
   },
   mounted() {
     this.modalTask = new Modal(this.$refs.modalTask);
+    this.$store.dispatch(`${this.store}/fetchTasks`);
   },
   computed: {
     tasks: {
@@ -157,11 +157,7 @@ export default {
       this._start_date= null;
       this._end_date= null;
       this.modalTask.toggle();
-    },
-
-    log(event) {
-      this.$store.dispatch(`${this.store}/log`, event);
-    },
+    }
   },
 };
 </script>

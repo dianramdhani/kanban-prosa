@@ -10,8 +10,10 @@
     "@popperjs/core": "^2.10.1",
     "bootstrap": "^5.1.0",
     "bootstrap-icons": "^1.5.0",
+    "firebase": "^9.0.1",
     "moment": "^2.29.1",
     "vue": "^3.0.0",
+    "vue-uuid": "^2.0.2",
     "vuedraggable": "^4.1.0",
     "vuex": "^4.0.2"
   },
