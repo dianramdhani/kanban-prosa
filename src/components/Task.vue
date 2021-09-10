@@ -1,5 +1,5 @@
 <template>
-  <div class="card border-0 bg-light mb-2">
+  <div class="card border-0 bg-light mb-2" title="Double click to update" @dblclick="dblclick">
     <div class="card-body">
       <p class="card-text fw-bold">{{ title }}</p>
       <div class="d-flex justify-content-between">
@@ -37,6 +37,7 @@ export default {
     start_date: Date | String,
     end_date: Date | String,
     tags: String,
+    dblclick: Function,
   },
   data() {
     return {
@@ -44,6 +45,9 @@ export default {
     };
   },
   beforeMount() {
+    this.user = userService.getUser(this.assignee);
+  },
+  beforeUpdate() {
     this.user = userService.getUser(this.assignee);
   },
   computed: {
@@ -55,6 +59,7 @@ export default {
     },
 
     imageUrl() {
+      console.log('ada perubahan');
       var images = require.context("../assets/img", false, /\.png$/);
       return images(`./${this.user.imageName}`);
     },
@@ -65,3 +70,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.card:hover {
+  background-color: #eee !important;
+}
+</style>

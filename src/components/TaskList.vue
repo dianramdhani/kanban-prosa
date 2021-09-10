@@ -33,6 +33,7 @@
               :start_date="element.start_date"
               :end_date="element.end_date"
               :tags="element.tags"
+              @dblclick="openUpdateForm(element.issue_id)"
             />
           </template>
         </draggable>
@@ -52,7 +53,9 @@
     <div class="modal-dialog">
       <form class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">New {{ title }}</h5>
+          <h5 class="modal-title">
+            {{ idToUpdate ? "Update" : "New" }} {{ title }}
+          </h5>
           <button
             type="button"
             class="btn-close"
@@ -98,13 +101,22 @@
             />
           </div>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" v-if="idToUpdate === null">
           <button
             type="submit"
             class="btn btn-primary"
             @click.prevent="addTask"
           >
-            Submit
+            Save
+          </button>
+        </div>
+        <div class="modal-footer" v-else>
+          <button type="submit" class="btn btn-primary" @click.prevent="updateTask">
+            Update
+          </button>
+
+          <button type="button" class="btn btn-danger" @click="deleteTask">
+            Delete
           </button>
         </div>
       </form>
@@ -136,6 +148,7 @@ export default {
       _end_date: null,
       users: userService.getUsers(),
       tags: tagsService.getTags(),
+      idToUpdate: null,
     };
   },
   userService: null,
@@ -154,6 +167,14 @@ export default {
     },
   },
   methods: {
+    clearForm() {
+      this._title = "";
+      this._tags = "";
+      this._assignee = "";
+      this._start_date = null;
+      this._end_date = null;
+    },
+
     addTask() {
       const task = {
         title: this._title,
@@ -163,11 +184,41 @@ export default {
         end_date: this._end_date,
       };
       this.$store.dispatch(`${this.store}/addTask`, task);
-      this._title = "";
-      this._tags = "";
-      this._assignee = "";
-      this._start_date = null;
-      this._end_date = null;
+      this.clearForm();
+      this.modalTask.toggle();
+    },
+
+    openUpdateForm(idToUpdate) {
+      this.idToUpdate = idToUpdate;
+      const task = this.tasks.find(({ issue_id }) => issue_id === idToUpdate);
+      this._title = task.title;
+      this._tags = task.tags;
+      this._assignee = task.assignee;
+      this._start_date = task.start_date;
+      this._end_date = task.end_date;
+      this.modalTask.toggle();
+    },
+
+    updateTask() {
+      this.tasks = this.tasks.map((task) =>
+        task.issue_id === this.idToUpdate
+          ? {
+              ...task,
+              title: this._title,
+              tags: this._tags,
+              assignee: this._assignee,
+              start_date: this._start_date,
+              end_date: this._end_date,
+            }
+          : task
+      );
+      this.clearForm();
+      this.modalTask.toggle();
+    },
+
+    deleteTask() {
+      this.tasks = this.tasks.filter(({issue_id})=>issue_id !== this.idToUpdate)
+      this.clearForm();
       this.modalTask.toggle();
     },
   },
