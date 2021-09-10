@@ -212,12 +212,14 @@ export default {
             }
           : task
       );
+      this.idToUpdate = null;
       this.clearForm();
       this.modalTask.toggle();
     },
 
     deleteTask() {
-      this.tasks = this.tasks.filter(({issue_id})=>issue_id !== this.idToUpdate)
+      this.tasks = this.tasks.filter(({issue_id})=>issue_id !== this.idToUpdate);
+      this.idToUpdate = null;
       this.clearForm();
       this.modalTask.toggle();
     },
