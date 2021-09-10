@@ -1,4 +1,6 @@
 # kanban-prosa
+Aplikasi ini dapat CRUD task dan juga reorder queue tasks. 
+Untuk melakukan delete/update dengan double click pada card task. 
 
 ## Project setup
 ```
