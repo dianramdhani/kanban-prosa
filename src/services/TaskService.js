@@ -1,7 +1,7 @@
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import db from '../firebase';
 
-export default class TaskService {
+export default class {
     docRef = null
 
     constructor(status) {

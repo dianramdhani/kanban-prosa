@@ -24,11 +24,7 @@
             Add Task
           </button>
         </div>
-        <draggable
-          v-model="tasks"
-          item-key="issue_id"
-          group="taskList"
-        >
+        <draggable v-model="tasks" item-key="issue_id" group="taskList">
           <template #item="{ element }">
             <Task
               :name="element.name"
@@ -71,11 +67,19 @@
           </div>
           <div class="mb-3">
             <label class="form-label">Tags</label>
-            <input type="text" class="form-control" v-model="_tags" />
+            <select class="form-select" v-model="_tags">
+              <option v-for="{ name } in tags" :key="name" :value="name">
+                {{ name }}
+              </option>
+            </select>
           </div>
           <div class="mb-3">
             <label class="form-label">Assignee</label>
-            <input type="text" class="form-control" v-model="_assignee" />
+            <select class="form-select" v-model="_assignee">
+              <option v-for="{ id, name } in users" :key="id" :value="id">
+                {{ name }}
+              </option>
+            </select>
           </div>
           <div class="mb-3">
             <label class="form-label">Start Date</label>
@@ -110,6 +114,11 @@
 
 <script>
 import { Modal } from "bootstrap";
+import UserService from "../services/UserService";
+import TagsService from "../services/TagsService";
+
+const userService = new UserService();
+const tagsService = new TagsService();
 
 export default {
   name: "TaskList",
@@ -125,8 +134,11 @@ export default {
       _assignee: "",
       _start_date: null,
       _end_date: null,
+      users: userService.getUsers(),
+      tags: tagsService.getTags(),
     };
   },
+  userService: null,
   mounted() {
     this.modalTask = new Modal(this.$refs.modalTask);
     this.$store.dispatch(`${this.store}/fetchTasks`);
@@ -151,13 +163,13 @@ export default {
         end_date: this._end_date,
       };
       this.$store.dispatch(`${this.store}/addTask`, task);
-      this._title= "";
-      this._tags= "";
-      this._assignee= "";
-      this._start_date= null;
-      this._end_date= null;
+      this._title = "";
+      this._tags = "";
+      this._assignee = "";
+      this._start_date = null;
+      this._end_date = null;
       this.modalTask.toggle();
-    }
+    },
   },
 };
 </script>

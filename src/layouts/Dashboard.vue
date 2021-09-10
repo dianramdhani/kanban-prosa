@@ -47,9 +47,24 @@
     </button>
     <div class="d-none d-md-block me-4">
       <span class="me-2">
-        <img src="../assets//img/user.png" alt="user1" class="user-icon" />
-        <img src="../assets//img/user.png" alt="user1" class="user-icon" />
-        <img src="../assets//img/user.png" alt="user1" class="user-icon" />
+        <img
+          src="../assets//img/user.png"
+          alt="user"
+          title="Thomas Fedric"
+          class="user-icon"
+        />
+        <img
+          src="../assets//img/user1.png"
+          alt="user1"
+          title="Martin Julian"
+          class="user-icon"
+        />
+        <img
+          src="../assets//img/user2.png"
+          alt="user2"
+          title="Dorman"
+          class="user-icon"
+        />
       </span>
       <span class="badge rounded-pill bg-light text-dark">70 Members</span>
     </div>
@@ -103,8 +118,18 @@
             >
               <a class="nav-link" href="#"> Researchers </a>
               <span>
-                <img src="../assets//img/user.png" alt="user1" class="user-icon" />
-                <img src="../assets//img/user.png" alt="user1" class="user-icon" />
+                <img
+                  src="../assets//img/user1.png"
+                  alt="user1"
+                  title="Martin Julian"
+                  class="user-icon"
+                />
+                <img
+                  src="../assets//img/user2.png"
+                  alt="user2"
+                  title="Dorman"
+                  class="user-icon"
+                />
               </span>
             </li>
             <li
@@ -112,7 +137,12 @@
             >
               <a class="nav-link" href="#"> FE/BE Team </a>
               <span>
-                <img src="../assets//img/user.png" alt="user1" class="user-icon" />
+                <img
+                  src="../assets//img/user2.png"
+                  alt="user2"
+                  title="Dorman"
+                  class="user-icon"
+                />
               </span>
             </li>
             <li
@@ -120,9 +150,24 @@
             >
               <a class="nav-link" href="#"> PM Team </a>
               <span>
-                <img src="../assets//img/user.png" alt="user1" class="user-icon" />
-                <img src="../assets//img/user.png" alt="user1" class="user-icon" />
-                <img src="../assets//img/user.png" alt="user1" class="user-icon" />
+                <img
+                  src="../assets//img/user.png"
+                  alt="user"
+                  title="Thomas Fedric"
+                  class="user-icon"
+                />
+                <img
+                  src="../assets//img/user1.png"
+                  alt="user1"
+                  title="Martin Julian"
+                  class="user-icon"
+                />
+                <img
+                  src="../assets//img/user2.png"
+                  alt="user2"
+                  title="Dorman"
+                  class="user-icon"
+                />
               </span>
             </li>
             <li class="nav-item">
@@ -131,9 +176,8 @@
           </ul>
         </div>
       </nav>
-
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <slot />
+        <slot />
       </main>
     </div>
   </div>
@@ -141,6 +185,6 @@
 
 <script>
 export default {
-  name: 'Dashboard',
+  name: "Dashboard",
 };
 </script>

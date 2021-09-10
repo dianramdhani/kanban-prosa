@@ -6,12 +6,14 @@
         <div>
           <img
             class="me-1"
-            src="../assets/a.png"
+            :src="imageUrl"
             alt="a"
             style="max-height: 25px"
-            :title="assignee"
+            :title="user.name"
           />
-          <span class="badge rounded-pill bg-primary">{{ tags }}</span>
+          <span class="badge rounded-pill" :class="{ [tagColor]: true }">{{
+            tags
+          }}</span>
         </div>
         {{ dueDate }}
       </div>
@@ -21,6 +23,11 @@
 
 <script>
 import moment from "moment";
+import UserService from "../services/UserService";
+import TagsService from "../services/TagsService";
+
+const userService = new UserService();
+const tagsService = new TagsService();
 
 export default {
   name: "Task",
@@ -31,12 +38,29 @@ export default {
     end_date: Date | String,
     tags: String,
   },
+  data() {
+    return {
+      user: null,
+    };
+  },
+  beforeMount() {
+    this.user = userService.getUser(this.assignee);
+  },
   computed: {
     dueDate() {
       const startDate = new Date(this.start_date),
         endDate = new Date(this.end_date),
         duration = Math.abs(endDate - startDate);
       return moment.duration(duration, "millisecond").humanize();
+    },
+
+    imageUrl() {
+      var images = require.context("../assets/img", false, /\.png$/);
+      return images(`./${this.user.imageName}`);
+    },
+
+    tagColor() {
+      return tagsService.getClassBackground(this.tags);
     },
   },
 };
