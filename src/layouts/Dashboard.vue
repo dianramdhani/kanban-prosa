@@ -66,7 +66,7 @@
           class="user-icon"
         />
       </span>
-      <span class="badge rounded-pill bg-light text-dark">70 Members</span>
+      <span class="badge rounded-pill bg-light text-dark">3 Members</span>
     </div>
   </header>
   <div class="container-fluid">
