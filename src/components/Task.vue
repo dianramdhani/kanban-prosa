@@ -59,7 +59,6 @@ export default {
     },
 
     imageUrl() {
-      console.log('ada perubahan');
       var images = require.context("../assets/img", false, /\.png$/);
       return images(`./${this.user.imageName}`);
     },
