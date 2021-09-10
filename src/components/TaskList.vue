@@ -1,5 +1,5 @@
 <template>
-  <div class="col">
+  <div class="col-md">
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between mb-4">

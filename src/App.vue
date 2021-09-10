@@ -1,36 +1,19 @@
 <template>
-  <Navigation />
-  <div class="drl-content px-4">
-    <Header />
+  <Dashboard>
     <div class="row g-3">
       <TaskList title="Backlog" store="backlog" />
       <TaskList title="To Do" store="todo" />
       <TaskList title="Done" store="done" />
     </div>
-  </div>
+  </Dashboard>
 </template>
 
 <script>
 import TaskList from "./components/TaskList.vue";
-import Header from "./components/Header.vue";
-import Navigation from "./components/Navigation.vue";
+import Dashboard from "./layouts/Dashboard.vue";
 
 export default {
+  components: { Dashboard, TaskList },
   name: "App",
-  components: {
-    Header,
-    TaskList,
-    Navigation,
-  },
 };
 </script>
-
-<style scoped>
-.drl-content {
-  width: calc(100vw - 300px);
-  height: 100vh;
-  overflow-y: auto;
-  position: absolute;
-  right: 0;
-}
-</style>

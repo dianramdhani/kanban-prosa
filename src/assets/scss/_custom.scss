@@ -1,0 +1,120 @@
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+h3 {
+  font-size: 0.875rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus {
+  color: #fff;
+}
+
+strong {
+  font-size: 0.6rem;
+}
+
+.navbar {
+  background-color: #fff;
+  height: $navbar-height;
+
+  .form-control {
+    background-color: transparent;
+    height: $navbar-height;
+    font-size: 1rem;
+
+    &:focus {
+      box-shadow: unset;
+    }
+
+    &,
+    &::placeholder {
+      color: #fff;
+    }
+  }
+
+  .search {
+    position: relative;
+
+    svg {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(-1rem, -50%);
+      color: #fff;
+    }
+  }
+
+  .navbar-brand {
+    box-shadow: unset;
+    background-color: unset;
+    font-size: 30px;
+    font-weight: bolder;
+    color: $black;
+
+    img {
+      margin-right: 1rem;
+    }
+  }
+
+  .navbar-toggler {
+    color: $primary;
+    border-color: $primary;
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2876, 169, 145, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .user-icon {
+    height: 1.8rem;
+    margin-right: 0.2rem;
+  }
+}
+
+.sidebar {
+  background-color: #fff;
+
+  .sidebar-heading {
+    font-weight: bolder;
+  }
+
+  .nav-link {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .user-icon {
+    height: 1.2rem;
+    margin-right: 0.2rem;
+  }
+}
+
+@media (min-width: 767.98px) {
+  .sidebar {
+    top: 0;
+    background-color: $primary;
+  }
+
+  .task-status *,
+  h3 {
+    color: #fff;
+  }
+
+  .sidebar .nav-link {
+    color: #fff;
+
+    &:hover {
+      color: $primary-light;
+    }
+  }
+}
