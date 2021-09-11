@@ -1,5 +1,9 @@
 <template>
-  <div class="card border-0 bg-light mb-2" title="Double click to update" @dblclick="dblclick">
+  <div
+    class="card border-0 bg-light mb-2"
+    title="Double click to update"
+    @dblclick="dblclick"
+  >
     <div class="card-body">
       <p class="card-text fw-bold">{{ title }}</p>
       <div class="d-flex justify-content-between">
@@ -52,8 +56,12 @@ export default {
   },
   computed: {
     dueDate() {
-      const startDate = new Date(this.start_date),
-        endDate = new Date(this.end_date),
+      const toDate = (date) =>
+        typeof date === "string"
+          ? moment(date, moment.HTML5_FMT.DATETIME_LOCAL).toDate()
+          : new Date(date);
+      const startDate = toDate(this.start_date),
+        endDate = toDate(this.end_date),
         duration = Math.abs(endDate - startDate);
       return moment.duration(duration, "millisecond").humanize();
     },
