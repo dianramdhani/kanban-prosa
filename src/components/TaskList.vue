@@ -6,7 +6,7 @@
           <h4 class="card-title">{{ title }}</h4>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-primary btn-rounded"
             @click="modalTask.toggle"
           >
             <svg
@@ -61,6 +61,7 @@
             class="btn-close"
             data-bs-dismiss="modal"
             aria-label="Close"
+            @click="clearForm"
           ></button>
         </div>
         <div class="modal-body">
@@ -104,18 +105,17 @@
         <div class="modal-footer" v-if="idToUpdate === null">
           <button
             type="submit"
-            class="btn btn-primary"
+            class="btn btn-primary btn-rounded"
             @click.prevent="addTask"
           >
             Save
           </button>
         </div>
         <div class="modal-footer" v-else>
-          <button type="submit" class="btn btn-primary" @click.prevent="updateTask">
+          <button type="submit" class="btn btn-primary btn-rounded" @click.prevent="updateTask">
             Update
           </button>
-
-          <button type="button" class="btn btn-danger" @click="deleteTask">
+          <button type="button" class="btn btn-danger btn-rounded" @click="deleteTask">
             Delete
           </button>
         </div>
@@ -173,6 +173,7 @@ export default {
       this._assignee = "";
       this._start_date = null;
       this._end_date = null;
+      this.idToUpdate = null;
     },
 
     addTask() {
@@ -212,14 +213,12 @@ export default {
             }
           : task
       );
-      this.idToUpdate = null;
       this.clearForm();
       this.modalTask.toggle();
     },
 
     deleteTask() {
       this.tasks = this.tasks.filter(({issue_id})=>issue_id !== this.idToUpdate);
-      this.idToUpdate = null;
       this.clearForm();
       this.modalTask.toggle();
     },
